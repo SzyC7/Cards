@@ -15,6 +15,10 @@ class BusinessContact:
         self.last_name = last_name
         self.email_business = email_business
         self.tel_business = tel_business
+        
+    @property
+    def label_length(self):
+        return sum([len(self.first_name), len(self.last_name),+1])
   
     def __str__(self):
         return f"{self.first_name} {self.last_name}, {self.email_address}, {self.occupation}, {self.company}"
@@ -27,17 +31,18 @@ class BusinessContact:
 
     def workcontact(self):
         return f"Wybieram numer służbowy: {self.tel_work} i dzwonię do {self.first_name} {self.last_name}"
-
-@property
-def label_length(self):
-    return sum([len(self.first_name), len(self.last_name),+1])
-
-def create_contacts():
+    
+def create_contacts(quantity):
     names = []
     fake = Faker()
-    for i in range(5):
-      names.append(BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company=fake.company(), post=fake.job()))
-    if __name__ == "__main__":
-        contacts = create_contacts()
-        for contact in contacts:
-            print(contact)
+    for i in range(quantity):
+        names.append(
+            BusinessContact(
+                first_name=fake.first_name(),
+                last_name=fake.last_name(),
+                company=fake.company(), post=fake.job()))
+
+if __name__ == "__main__":
+    contacts = create_contacts()
+    for contact in contacts:
+        print(contact)
